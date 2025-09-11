@@ -1,11 +1,10 @@
 import React from "react";
-// import NavBar from "./NavBar";
+import NavBar from "./NavBar";
 // import Header from "./Header";
 
-function AboutUs() {
+function AboutUs(props) {
     return (<div>
-        {/* <Header />
-        <NavBar /> */}
+        <NavBar username={props.username} isLoggedIn={props.isLoggedIn}/>
         <h2>About Us!</h2>
     </div>)
 }

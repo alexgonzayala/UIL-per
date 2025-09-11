@@ -1,11 +1,10 @@
 import React from "react";
-// import NavBar from "./NavBar";
+import NavBar from "./NavBar";
 // import Header from "./Header";
 
-function ContactUs() {
+function ContactUs(props) {
     return (<div>
-        {/* <Header />
-        <NavBar /> */}
+        <NavBar username={props.username} isLoggedIn={props.isLoggedIn}/>
         <h2>Contact Us!</h2>
     </div>)
 }
