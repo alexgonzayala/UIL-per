@@ -1,20 +1,21 @@
 import React from "react";
-import users from "../data/users.jsx";
-import { useNavigate } from "react-router-dom";
+// import users from "../data/users.jsx"; no longer need to import users here because it's handled by context.
+import { useAuth } from "../context/AuthContext.jsx";
+import { useNavigate, Link } from "react-router-dom";
 
-function LogInPage(props) {
+function LogInPage() {
     /////////////////////////////////////////////////////////////////////
-    // available props: 
-    // logIn (function that sets isLoggedIn to true in App.jsx)
-    // settingUser - function that sets the username in App.jsx.
+    // context provides:
+    // logIn - function that takes in email and password and logs in user
+    //         if credentials are correct, returns true. else, returns false.
     /////////////////////////////////////////////////////////////////////
     const navigate = useNavigate();
-
+    const {logIn} = useAuth();
     const [userInfo, setUserInfo] = React.useState({
         email:"",
         password:""
     })
-    
+    const [error, setError] = React.useState("");
 
     function handleChange(event) {
         const { name, value } = event.target
@@ -23,44 +24,44 @@ function LogInPage(props) {
         })
     }
 
-    function handleClick(event) {
-        // here is where the login info logic with the backend will take place im
-        // pretty sure. Once Submit is clicked, by default behavior the form sends 
-        // a POST request, of which we'll learn how to handle, that goes to the 
-        // server and causes the page to refresh.
-        // console.log("hi i submitted")
-        // event.preventDefault();
-        // return
-        // essentially, if the email and password from userInfo matches a
-        // user in users.jsx, then we set isLoggedIn to true.
-        /// this is a preliminary way to do this. This is slow, but in the future
-        // we'll make this faster with a backend.
-        for (let i = 0; i < users.length; i++) {
-            if (userInfo.email === users[i].username && userInfo.password === users[i].password) {
-                <span>Login successful!</span>
-                props.logIn(true);
-                props.settingUser(userInfo.email);
-                // i want to redirect the user to the home page once they log in.
-                navigate("/");
-                // return;
-                event.preventDefault();
-            }
-            else {
-                <div>Incorrect email or password.</div>
-            }
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const success = await logIn(userInfo.email, userInfo.password);
+
+        if (success) {
+            navigate("/");
+        } else {
+            setError("Invalid login credentials. Check email and / or password and try again.");
         }
     }
 
-    return <div>
-        <h2>Welcome</h2>
-        <form>
-            <input name="email" type="text" placeholder="email" onChange={handleChange} value={userInfo.email} />
-            <input name="password" type="password" placeholder="password" onChange={handleChange} value={userInfo.password}/>
-            <button onClick={handleClick}>
-                <span>Submit</span>
-            </button>
-        </form>
-    </div>
+    return (
+        <div>
+            <h2>Welcome</h2>
+            <form onSubmit={handleSubmit}>
+                <input 
+                    name="email" 
+                    type="text" 
+                    placeholder="email" 
+                    onChange={handleChange} 
+                    value={userInfo.email} 
+                />
+                <input 
+                    name="password" 
+                    type="password" 
+                    placeholder="password" 
+                    onChange={handleChange} 
+                    value={userInfo.password}
+                />
+                <button type="submit">
+                    <span>Submit</span>
+                </button>
+                {/* later, replace style with class name */}
+                {error && <p style={{color: 'red'}}><b>{error}</b></p>}
+            </form>
+            <p>Don't have an account? Head back to <Link to='/'><b>Home</b></Link> for now. Sign up page is coming soon!</p>
+        </div>
+    );
 }
 
 export default LogInPage;

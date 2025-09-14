@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes} from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import PDFGen from './PDF-generator';
 import ContactUs from './Contact-us';
 import AboutUs from './About-us';
@@ -8,30 +8,36 @@ import GeneralMath from './General-math';
 import Home from './Home';
 import './App.css'
 import LogInPage from './LogIn';
+import Dashboard from './Dashboard';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
 
   // state that tracks if the user is logged in or not.
   // we can use this to conditionally render diff components
   // depending on if the user's login status.
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
-  const [username, setUsername] = React.useState("");
+  // const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+  // const [username, setUsername] = React.useState("");
 
-  function settingUser(name) {
-    setUsername(name);
-  }
+  // function settingUser(name) {
+  //   setUsername(name);
+  // }
 
+  // we no longer need to pass down logIn and settingUser as props
+  // to any component because we are using context now. Each component
+  // can access the authentication context directly without prop drilling.
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home username={username} isLoggedIn={isLoggedIn}/>}>Home</Route>
-        <Route path="/about-us" element={<AboutUs username={username} isLoggedIn={isLoggedIn}/>}>About Us</Route>
-        <Route path="/number-sense" element={<NumberSense username={username} isLoggedIn={isLoggedIn}/>}>Number Sense</Route>
-        <Route path="/general-math" element={<GeneralMath username={username} isLoggedIn={isLoggedIn}/>}>General Math</Route>
-        <Route path="/contact-us" element={<ContactUs username={username} isLoggedIn={isLoggedIn}/>}>Contact Us</Route>
-        <Route path="/log-in" element={<LogInPage settingUser={settingUser} logIn={setIsLoggedIn}/>}>Log In</Route>
+        <Route path="/" element={<Home />}>Home</Route>
+        <Route path="/about-us" element={<AboutUs />}>About Us</Route>
+        <Route path="/number-sense" element={<NumberSense />}>Number Sense</Route>
+        <Route path="/general-math" element={<GeneralMath />}>General Math</Route>
+        <Route path="/contact-us" element={<ContactUs />}>Contact Us</Route>
+        <Route path="/log-in" element={<LogInPage />}>Log In</Route>
         <Route path='/pdf-gen' element={<PDFGen />}>PDF Generator</Route>
         <Route path="/sign-up" element={<div><h2>Sign up page coming soon!</h2></div>}>Sign Up Page</Route>
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>Dashboard</Route>
       </Routes>
     </div>
   );
