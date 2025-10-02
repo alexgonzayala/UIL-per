@@ -1,0 +1,31 @@
+.container-practice-ns {
+    /* phone screens */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 4fr;
+    grid-template-areas: "header" "body"
+}
+
+@media (min-width: 768px) {
+    /* tablet screens */
+    .container-practice-ns {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "header header" "body body"
+    }
+}
+
+@media (min-width: 1024px) {
+    /* desktop screens */
+    .container-practice-ns {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: "header header header" "body body body";
+    }
+}
+
+.practice-ns-header {
+    grid-area: header;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

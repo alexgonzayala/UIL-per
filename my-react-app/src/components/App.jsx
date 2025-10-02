@@ -1,15 +1,16 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import PDFGen from './PDF-generator';
-import ContactUs from './Contact-us';
-import AboutUs from './About-us';
-import NumberSense from './Number-sense';
-import GeneralMath from './General-math';
+import PDFGen from './PDFGenerator';
+import ContactUs from './ContactUs';
+import AboutUs from './AboutUs';
+import NumberSense from './number-sense/NumberSense';
+import GeneralMath from './GeneralMath';
 import Home from './Home';
 import './App.css'
 import LogInPage from './LogIn';
 import Dashboard from './Dashboard';
 import ProtectedRoute from './ProtectedRoute';
+import PracticeNS from './number-sense/PracticeNS';
 
 function App() {
 
@@ -27,11 +28,13 @@ function App() {
   // to any component because we are using context now. Each component
   // can access the authentication context directly without prop drilling.
   return (
-    <div>
+    <div className="container-app">
       <Routes>
-        <Route path="/" element={<Home />}>Home</Route>
+        <Route path="/" element={<Home className="container-main"/>}>Home</Route>
         <Route path="/about-us" element={<AboutUs />}>About Us</Route>
-        <Route path="/number-sense" element={<NumberSense />}>Number Sense</Route>
+        <Route path="/number-sense" element={<NumberSense />}/>
+        <Route path="/number-sense/practice" element={<ProtectedRoute><PracticeNS /></ProtectedRoute>}/>
+          {/* <Route path="/about" element={<AboutNS />}/> */}
         <Route path="/general-math" element={<GeneralMath />}>General Math</Route>
         <Route path="/contact-us" element={<ContactUs />}>Contact Us</Route>
         <Route path="/log-in" element={<LogInPage />}>Log In</Route>
