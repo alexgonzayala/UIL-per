@@ -11,6 +11,7 @@ import LogInPage from './LogIn';
 import Dashboard from './Dashboard';
 import ProtectedRoute from './ProtectedRoute';
 import PracticeNS from './number-sense/PracticeNS';
+import NumberSenseOnline from './number-sense/NumberSenseOnline';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
         <Route path='/pdf-gen' element={<PDFGen />}>PDF Generator</Route>
         <Route path="/sign-up" element={<div><h2>Sign up page coming soon!</h2></div>}>Sign Up Page</Route>
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>Dashboard</Route>
+        <Route path="/number-sense/practice/online" element={<ProtectedRoute><NumberSenseOnline /></ProtectedRoute>}/>
       </Routes>
     </div>
   );

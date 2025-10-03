@@ -1,4 +1,4 @@
-.container-practice-ns {
+.container.practice-ns {
     /* phone screens */
     display: grid;
     grid-template-columns: 1fr;
@@ -8,24 +8,87 @@
 
 @media (min-width: 768px) {
     /* tablet screens */
-    .container-practice-ns {
+    .container.practice-ns {
         grid-template-columns: 1fr 1fr;
-        grid-template-areas: "header header" "body body"
+        grid-template-areas: "header header" "online pdf"
     }
 }
 
 @media (min-width: 1024px) {
     /* desktop screens */
-    .container-practice-ns {
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-areas: "header header header" "body body body";
+    .container.practice-ns {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "header header" "online pdf";
     }
 }
 
-.practice-ns-header {
+.container.header {
     grid-area: header;
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+.container.header h2 {
+    margin: 1rem;
     justify-content: center;
     align-items: center;
+}
+
+.container.button {
+    justify-content: flex-start;
+}
+
+.container.online {
+    grid-area: online;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    margin: 1rem;
+}
+
+.container.pdf {
+    grid-area: pdf;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin: 1rem;
+}
+
+.mode-card {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 280px;
+    height: 280px;
+    padding: 1rem;
+    gap: 1rem;
+    border-radius: 20px;
+    border-width: 5px;
+    border-style: solid;
+    background-size: cover;
+    background-position: center;
+    text-shadow: 2px 2px 4px #5e5e5e;
+}
+
+.mode-card.pdf {
+    grid-area: pdf;
+    /* flex-wrap: wrap;
+    flex-direction: column; */
+    background-image: url(https://i.ytimg.com/vi/3CcAgMv7CQM/maxresdefault.jpg);
+    text-shadow: 2px 2px 4px #5e5e5e;
+}
+.mode-card.pdf h2 {
+    color: black;
     
+}
+.mode-card.online {
+    grid-area: online;
+    background-image: url(https://static.vecteezy.com/system/resources/previews/017/198/736/non_2x/realistic-math-chalkboard-background-illustration-vector.jpg);
+}
+
+.mode-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
 }

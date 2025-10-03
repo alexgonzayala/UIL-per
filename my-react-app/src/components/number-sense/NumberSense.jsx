@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../NavBar";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PDFGen from "../PDFGenerator";
 import Header from "../Header";
 import { useAuth } from "../../context/AuthContext";
