@@ -1,4 +1,4 @@
-.container.practice-ns {
+.container.practice-ns, .container.page {
     /* phone screens */
     display: grid;
     grid-template-columns: 1fr;
@@ -91,4 +91,14 @@
 .mode-card:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.container.setup {
+    grid-area: body;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 1fr 1fr; */
 }

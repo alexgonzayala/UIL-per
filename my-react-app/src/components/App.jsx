@@ -4,30 +4,25 @@ import PDFGen from './PDFGenerator';
 import ContactUs from './ContactUs';
 import AboutUs from './AboutUs';
 import NumberSense from './number-sense/NumberSense';
-import GeneralMath from './GeneralMath';
+import GeneralMath from './general-math/GeneralMath';
 import Home from './Home';
 import './App.css'
 import LogInPage from './LogIn';
 import Dashboard from './Dashboard';
 import ProtectedRoute from './ProtectedRoute';
 import PracticeNS from './number-sense/PracticeNS';
-import NumberSenseOnline from './number-sense/NumberSenseOnline';
+import SetupPage from './number-sense/SetupPage';
 
 function App() {
-
-  // state that tracks if the user is logged in or not.
-  // we can use this to conditionally render diff components
-  // depending on if the user's login status.
-  // const [isLoggedIn, setIsLoggedIn] = React.useState(false)
-  // const [username, setUsername] = React.useState("");
-
-  // function settingUser(name) {
-  //   setUsername(name);
-  // }
 
   // we no longer need to pass down logIn and settingUser as props
   // to any component because we are using context now. Each component
   // can access the authentication context directly without prop drilling.
+
+  // i will at some point refactor the way i make each webpage
+  // so that the header, nav bar, and footer are not repeated in each
+  // component file. Maybe make a layout component that wraps around
+  // each page component.
   return (
     <div className="container-app">
       <Routes>
@@ -42,7 +37,7 @@ function App() {
         <Route path='/pdf-gen' element={<PDFGen />}>PDF Generator</Route>
         <Route path="/sign-up" element={<div><h2>Sign up page coming soon!</h2></div>}>Sign Up Page</Route>
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>Dashboard</Route>
-        <Route path="/number-sense/practice/online" element={<ProtectedRoute><NumberSenseOnline /></ProtectedRoute>}/>
+        <Route path="/number-sense/practice/online" element={<ProtectedRoute><SetupPage /></ProtectedRoute>}/>
       </Routes>
     </div>
   );
